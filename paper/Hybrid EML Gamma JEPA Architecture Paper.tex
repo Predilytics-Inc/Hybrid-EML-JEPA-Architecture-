@@ -1,0 +1,345 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage{lmodern}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{booktabs,tabularx,array}
+\usepackage{enumitem}
+\usepackage{microtype}
+\usepackage[numbers,square,sort&compress]{natbib}
+\usepackage{hyperref}
+
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue,
+  citecolor=blue,
+  urlcolor=blue,
+  pdftitle={A Hybrid Gamma-EML-alpha-JEPA Architecture for Spectral-Topological World Models},
+  pdfauthor={Biju Jose}
+}
+
+\newtheorem{definition}{Definition}
+\newtheorem{construction}{Construction}
+\newtheorem{hypothesis}{Hypothesis}
+\newtheorem{protocol}{Protocol}
+\newtheorem{proposition}{Proposition}
+\newtheorem{remark}{Remark}
+
+\newcolumntype{Y}{>{\raggedright\arraybackslash}X}
+
+\title{A Hybrid ($\Gamma$--EML--$\alpha$--JEPA) Architecture for Spectral-Topological\\
+World Models\\
+\large A Mathematical Model with Adversarial Validation on Encoders and  Predictors}
+\author{Biju Jose\\
+Predilytics Inc., California, USA\\
+\texttt{bjose@predilyticsinc.com}}
+\date{May 5, 2026}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+We formulate an experimental mathematics program in which a Hybrid $\Gamma$--EML--$\alpha$ architecture is extended by a JEPA-style latent predictive module and a RevA adversarial validation layer. The parent architecture supplies a finite observable-state world model: $\alpha$ is a local action density inducing a path measure over trajectories, $\Gamma$ is the corresponding minimum-action transition map, and EML is the symbolic representation class in which transition energies, event updates, and cross-scale couplings are expressed. The proposed extension adds a spectral-topological world-state generator constructed from finite operators $K(t)$ and determinant observables $D(t)=\det(I-K(t))$. Its lifted phase $\Theta(t)=\operatorname{unwrap}\arg D(t)$, phase velocity $\rho(t)=\pi^{-1}d\Theta/dt$, integer winding index $k(t)$, and eigenvalue crossing diagnostics form latent targets for a joint-embedding predictive architecture. A context encoder maps past operator-state trajectories to latent context embeddings, a target encoder maps future spectral-topological observables to latent targets, and a predictor learns target embeddings without reconstructing raw observations. The learned predictions are not accepted by training loss alone. They are subjected to RevA-style falsification by wrong-sign, scrambled, ablated, random-residue, and projection-only controls. We give definitions, constructions, falsifiable hypotheses, and a minimal experimental protocol. Pilot $P=751$ canary results are included to illustrate the distinction between residue-sensitive flatness, crossing proximity, event-bridge coherence, and full topological promotion. This contribution is intended as a testable architecture for finite spectral-topological prediction and artifact rejection.
+\end{abstract}
+
+\noindent\textbf{Keywords:} experimental mathematics; spectral topology; determinant phase; world models; joint embedding predictive architecture; adversarial controls; finite operator systems.
+
+\section{Introduction}
+Experimental mathematics often begins with a finite computational object, extracts structured observables from it, and then asks which regularities persist under controls. The program developed here follows that pattern. It treats a dynamical system as a finite observable trajectory, constructs an operator-valued world state, compresses that world state through determinant and phase observables, and then asks whether the resulting topology is predictive and falsifiable. The central object is not a theorem asserting a universal law, but a pipeline whose claims can be accepted, rejected, or revised by explicit experiments.
+
+The starting point is the Hybrid $\Gamma$--EML--$\alpha$ architecture. In this architecture, $\alpha$ is a local action density, $\Gamma$ is the minimum-action map induced by the path measure associated with $\alpha$, and EML is the symbolic representation class used to express the transition energy, event conditioning, and multi-scale coupling. This parent architecture is naturally compatible with predictive world-modeling because it already distinguishes three levels: a path measure, a deterministic transition selected from that measure, and a representation class used to learn the transition law.
+
+The proposed realignment adds a JEPA-style latent predictive component to this parent architecture. JEPA methods predict target representations from context representations rather than reconstructing raw observations. In the present setting, the target representation is not an image patch or a token embedding. It is a spectral-topological world state derived from a finite operator determinant. This gives a mathematically explicit target space:
+\begin{equation}
+D(t)=\det(I-K(t)),\qquad \Theta(t)=\operatorname{unwrap}\arg D(t),\qquad \rho(t)=\frac{1}{\pi}\frac{d\Theta}{dt},
+\end{equation}
+with discrete topology summarized by
+\begin{equation}
+k(t)=\left\lfloor \frac{\Theta(t)-\Theta(0)}{\pi}\right\rfloor .
+\end{equation}
+Eigenvalue-plane quantities such as $\min_i |1-\lambda_i(t)|$ provide crossing and event diagnostics, while the lifted determinant phase supplies the global topological coordinate.
+
+The third component is RevA-style adversarial validation. A predictive model may fit future latent states while still learning an artifact. Therefore the architecture requires wrong-sign, scrambled, ablated, random-residue, and projection-only controls. In this respect, the proposal differs from a standard representation-learning system: prediction is necessary but not sufficient. A predicted topology must also survive adversarial falsification.
+
+\section{Related architecture and prior work}
+The Hybrid $\Gamma$--EML--$\alpha$ framework was introduced as a finite-dimensional architecture for observable multi-scale dynamics, action-based inference, and path-measure learning \cite{JoseHybrid2026,JoseDistributed2026}. The operator--determinant program developed a finite spectral-topological layer, including lifted determinant phase, integer winding, eigenvalue crossing diagnostics, and RevA-style controls \cite{JoseOperator2026}. This paper merges those two lines with the JEPA view of representation-space prediction \cite{Assran2023,DawidLeCun2023,LeCun2022}.
+
+Assran et al. introduced I-JEPA as a self-supervised architecture in which representations of target image regions are predicted from representations of context regions rather than from pixel reconstruction \cite{Assran2023}. Dawid and LeCun describe hierarchical JEPA and latent-variable energy-based models as components of predictive world-model architectures \cite{DawidLeCun2023}. Our use of JEPA is architectural rather than vision-specific: the target is a future spectral-topological representation of a finite operator-state trajectory.
+
+The determinant phase layer also has classical ancestry in the argument principle, phase lifting, and winding-number methods. However, the present proposal does not claim novelty for phase lifting itself. The distinctive object is the combination of a finite $\Gamma$--EML--$\alpha$ operator-state generator, determinant-derived latent topology, JEPA-style latent prediction, and adversarial controls.
+
+\section{Finite observable state systems}
+\begin{definition}[Observable trajectory]
+Let $X$ be a compact finite-dimensional state space and let $C$ be a finite-dimensional context or event space. An observable trajectory is a sequence
+\begin{equation}
+\mathcal{T}=(x_0,c_0,x_1,c_1,\ldots,x_T),
+\end{equation}
+where $x_t\in X$ and $c_t\in C$.
+\end{definition}
+
+\begin{definition}[EML-representable action density]
+Let $\mathcal{F}_{\mathrm{EML}}$ be a symbolic or compositional hypothesis class \cite{Odrzywolek2026}. A local action density is an EML-representable function
+\begin{equation}
+\alpha_\theta:X\times X\times C\to \mathbb{R},
+\end{equation}
+where $\alpha_\theta(x_t,x_{t+1};c_t)$ assigns an energy or cost to the transition $x_t\mapsto x_{t+1}$ under context $c_t$.
+\end{definition}
+
+The local action induces a Gibbs-type transition kernel
+\begin{equation}
+P_\theta(x_{t+1}\mid x_t,c_t)=\frac{\exp[-\beta\alpha_\theta(x_t,x_{t+1};c_t)]}{Z_\theta(x_t,c_t)},
+\end{equation}
+where
+\begin{equation}
+Z_\theta(x_t,c_t)=\sum_{y\in X}\exp[-\beta\alpha_\theta(x_t,y;c_t)].
+\end{equation}
+The deterministic $\Gamma$ map is the maximum-probability or minimum-action transition
+\begin{equation}
+\Gamma_\theta(x_t,c_t)=\arg\min_{y\in X}\alpha_\theta(x_t,y;c_t).
+\end{equation}
+Thus $\alpha$ supplies the path measure, $\Gamma$ supplies the deterministic trajectory selected from that measure, and EML supplies the representation class in which both are expressed.
+
+\section{Spectral-topological world-state generator}
+\begin{construction}[Operator-state generator]
+Given an observable trajectory and an EML-representable action density, define a finite operator
+\begin{equation}
+K_\theta(t)=K_{\mathrm{EML}}(x_{\le t},c_{\le t},\alpha_\theta),
+\end{equation}
+where $K_\theta(t)\in \mathbb{C}^{n\times n}$ encodes directed or undirected interaction structure among latent components, sensors, modes, arithmetic states, or graph nodes. The dimension $n$ is finite and may depend on the cutoff, scale, or discretization.
+\end{construction}
+
+The determinant compression is
+\begin{equation}
+D_\theta(t)=\det(I-K_\theta(t)).
+\end{equation}
+If $D_\theta(t)\ne 0$ over the test window, the lifted phase is
+\begin{equation}
+\Theta_\theta(t)=\operatorname{unwrap}\arg D_\theta(t)\in \mathbb{R}.
+\end{equation}
+This is the principal spectral-topological observable. Its derivative gives phase flow,
+\begin{equation}
+\rho_\theta(t)=\frac{1}{\pi}\frac{d\Theta_\theta}{dt},
+\end{equation}
+and its integer winding index is
+\begin{equation}
+k_\theta(t)=\left\lfloor \frac{\Theta_\theta(t)-\Theta_\theta(t_0)}{\pi}\right\rfloor .
+\end{equation}
+Eigenvalue diagnostics are computed from the spectrum
+\begin{equation}
+\sigma(K_\theta(t))=\{\lambda_1(t),\ldots,\lambda_n(t)\},
+\end{equation}
+with event proximity
+\begin{equation}
+\delta_\theta(t)=\min_i |1-\lambda_i(t)|.
+\end{equation}
+The determinant phase lives on the lifted determinant plane, while $\delta_\theta(t)$ is an eigenvalue-plane diagnostic that detects proximity to determinant singularity.
+
+\begin{definition}[Spectral-topological world state]
+The spectral-topological world state at time $t$ is a vector or structured tuple
+\begin{equation}
+W_\theta(t)=\bigl(K_\theta(t),D_\theta(t),\Theta_\theta(t),\rho_\theta(t),k_\theta(t),\delta_\theta(t),A_\theta(t)\bigr),
+\end{equation}
+where $A_\theta(t)$ may include ablation margins, local crossing masks, phase-orientation statistics, or event-pair coherence features.
+\end{definition}
+
+\section{JEPA-style latent prediction over spectral topology}
+The JEPA module is inserted inside the Hybrid architecture, rather than attached as an external wrapper. The $\Gamma$--EML--$\alpha$ stack produces world states, the determinant layer extracts spectral-topological targets, and the JEPA module predicts future targets in representation space.
+
+Let $s<t$ and let $\Delta>0$. Define a context window
+\begin{equation}
+C_t=\{W_\theta(s):t-m\le s\le t\}
+\end{equation}
+and a target window
+\begin{equation}
+Y_{t+\Delta}=\{W_\theta(s):t+\Delta\le s\le t+\Delta+\ell\}.
+\end{equation}
+A context encoder, target encoder, and predictor are maps
+\begin{align}
+E_c&:C_t\mapsto z_c(t),\\
+E_y&:Y_{t+\Delta}\mapsto z_y(t+\Delta),\\
+P_\psi&:z_c(t)\mapsto \widehat z_y(t+\Delta).
+\end{align}
+The JEPA-style loss is
+\begin{equation}
+L_{\mathrm{JEPA}}(\theta,\psi)=\mathbb{E}_t\|P_\psi(E_c(C_t))-E_y(Y_{t+\Delta})\|^2.
+\end{equation}
+This loss is deliberately representation-level. It does not require reconstruction of raw observations.
+
+A combined training objective may be written as
+\begin{equation}
+L=L_\alpha+\lambda_J L_{\mathrm{JEPA}}+\lambda_R R_{\mathrm{EML}},
+\end{equation}
+where $L_\alpha$ is the trajectory likelihood or action-fitting term and $R_{\mathrm{EML}}$ penalizes symbolic complexity, instability, or non-identifiability.
+
+\begin{remark}[Prediction is not validation]
+A low JEPA prediction loss does not certify that the learned topology is meaningful. It only says that the target embedding is predictable from the context embedding. The architecture therefore separates learning from validation. RevA controls test whether the predicted or observed topology depends on the true branch structure rather than on an artifact of amplitude, sampling, or representation.
+\end{remark}
+
+\section{Adversarial validation layer}
+For each true branch $B_{\mathrm{true}}$, construct controls:
+\begin{align}
+B_{\mathrm{scr}}&: \text{scramble labels, residues, sensors, modes, or component identities},\\
+B_{\mathrm{ws}}&: \text{wrong-sign or reversed-orientation dynamics},\\
+B_{\mathrm{abl}}&: \text{zeroed, ablated, or projection-only residue},\\
+B_{\mathrm{rand}}&: \text{random trace-zero or randomized residue controls}.
+\end{align}
+The same pipeline is run for each branch. A feature is promotable only when the true branch separates from controls under pre-registered statistics.
+
+\begin{definition}[RevA admissibility]
+A candidate spectral-topological predictor is RevA-admissible on a test window if it satisfies all locked control requirements for that experiment. A representative gate may require
+\begin{equation}
+\Delta_{\mathrm{scr}}=F(B_{\mathrm{scr}})-F(B_{\mathrm{true}})>0,
+\end{equation}
+where $F$ is a spectral-flatness functional, together with
+\begin{equation}
+H_{\mathrm{true}}<H_{\mathrm{scr}},\qquad R_{\mathrm{corr}}>1.2,
+\end{equation}
+where $H$ is a pre-registered topology entropy and $R_{\mathrm{corr}}$ is a pre-registered no-bridge or event-bridge correlation ratio.
+\end{definition}
+
+The gate may be strengthened by event-local statistics. Let
+\begin{equation}
+E_q(t)=1[\delta(t)\le Q_q(\delta)]
+\end{equation}
+be a rarity-normalized crossing mask. An event-pair bridge compares local coherence in the true branch against the same event windows in a control branch. The bridge ratio may be written as
+\begin{equation}
+R_{\mathrm{bridge}}=\frac{C_{\mathrm{event,true}}}{C_{\mathrm{event,scr}}}.
+\end{equation}
+The architecture does not use this ratio as a post hoc explanation; it is a pre-registered validation statistic.
+
+\section{Experimental hypotheses}
+The following hypotheses define a journal-style experimental program. They are intentionally finite, falsifiable, and control-dependent.
+
+\begin{hypothesis}[Predictive world-state hypothesis]
+For a fixed class of observable systems and a fixed EML representation class, the JEPA module predicts future spectral-topological embeddings with lower error than persistence, shuffled-context, and ablated-context baselines.
+\end{hypothesis}
+
+\begin{hypothesis}[Residue-sensitive flatness]
+There exists a class of operator-state generators for which the true branch has lower spectral flatness than scrambled and ablated controls:
+\begin{equation}
+F_{\mathrm{true}}<F_{\mathrm{scr}},\qquad F_{\mathrm{true}}<F_{\mathrm{abl}}.
+\end{equation}
+\end{hypothesis}
+
+\begin{hypothesis}[Topological ordering]
+There exists a pre-registered topology signature $T(t)$ such that
+\begin{equation}
+H(T_{\mathrm{true}})<H(T_{\mathrm{scr}}).
+\end{equation}
+Candidate signatures include
+\begin{equation}
+T(t)=(\Delta k(t),\operatorname{sign}d\Theta(t),E_q(t),\operatorname{gapbin}(t)).
+\end{equation}
+\end{hypothesis}
+
+\begin{hypothesis}[Bridge coherence]
+For sparse event windows selected by $E_q(t)$, event-local or event-pair coherence is larger in the true branch than in the scrambled branch:
+\begin{equation}
+R_{\mathrm{bridge}}>1.2.
+\end{equation}
+\end{hypothesis}
+
+\section{Experimental protocol}
+\begin{protocol}[Minimal experimental mathematics protocol]
+Fix a dataset, an EML representation class, a cutoff or state dimension, and a list of controls. The experiment proceeds as follows.
+\begin{enumerate}
+\item Learn or specify $\alpha_\theta$ and the induced $\Gamma_\theta$ transition map.
+\item Construct $K_\theta(t)$ for every time step and every control branch.
+\item Compute $D_\theta(t)=\det(I-K_\theta(t))$, $\Theta_\theta(t)$, $\rho_\theta(t)$, $k_\theta(t)$, and $\delta_\theta(t)$.
+\item Train the JEPA module to predict target spectral-topological embeddings from context embeddings.
+\item Evaluate JEPA prediction error against persistence, wrong-context, shuffled, and ablated baselines.
+\item Apply RevA gates to observed and predicted spectral-topological states.
+\item Report both passes and failures. A negative subgate is a result, not a nuisance.
+\end{enumerate}
+\end{protocol}
+
+The computational outputs should include complete time series, branch-level summaries, control summaries, event tables, bridge-ratio tables, and reproducibility metadata. Claims should not be promoted across scales unless the same locked gates pass across the declared cutoff or scale range.
+
+\section{Pilot canary experiment at $P=751$}
+The prime-induced determinant program used $P=751$ as a canary cutoff because it exposed scramble-flatness and topology-separation failures in several candidate kernels. The details are not central to the architecture, but the canary illustrates why the JEPA and RevA layers must be separated.
+
+\begin{table}[htbp]
+\small
+\centering
+\begin{tabularx}{\linewidth}{@{}Y l l l Y@{}}
+\toprule
+Module & $\Delta_{\mathrm{scr}}>0$ & $H_{\mathrm{true}}<H_{\mathrm{scr}}$ & corr./bridge & status\\
+\midrule
+Temporal memory embedding $K^*(t)=(1-0.3)K(t)+0.3K(t-2)$ & yes & no & no & Q5-style partial repair\\
+Rarity-normalized event-pair bridge & not sufficient alone & local joint signature yes & yes & local bridge only\\
+Locked Q6$'$ confirmation & no & no & yes & not promotable\\
+Memory plus event-commutator layer & no & no & no & rejected\\
+\bottomrule
+\end{tabularx}
+\caption{Representative $P=751$ canary outcomes from the operator-determinant stack. Values are included to illustrate gate separation, not to claim a final result.}
+\end{table}
+
+The lesson is methodological. A module may repair residue-sensitive flatness without repairing topology; another may produce event-bridge coherence without satisfying flatness or entropy; a third may preserve near-crossing proximity while remaining control-degenerate. Therefore the architecture should not collapse prediction, spectral topology, and validation into a single metric.
+
+\section{Mathematical interpretation}
+The proposed architecture has three nested levels. The first is variational: $\alpha$ induces a path measure and $\Gamma$ selects the minimum-action trajectory. The second is spectral: $K(t)$ and $D(t)$ compress the trajectory into a determinant phase on the lifted complex plane. The third is predictive: a JEPA-style module learns to forecast latent spectral-topological targets. The RevA layer is neither a training loss nor a new spectral invariant. It is a falsification layer that asks whether the apparent topology survives branch controls.
+
+\begin{proposition}[Architecture-level separation]
+In the proposed stack, predictive accuracy, spectral-topological structure, and adversarial validity are logically distinct. A model may have low JEPA loss and fail RevA controls; it may pass a crossing diagnostic and fail topology entropy; it may repair flatness while failing no-bridge correlation.
+\end{proposition}
+
+\begin{proof}
+Each statement follows from the definitions. JEPA loss compares context-predicted and target-encoded representations. Crossing diagnostics depend on eigenvalue proximity $\delta(t)$. Topology entropy depends on the symbolic distribution of $k(t)$, $d\Theta(t)$, and event features. RevA controls compare true and altered branches. These quantities are functions of overlapping but non-identical data. None is algebraically implied by the others without additional assumptions.
+\end{proof}
+
+This separation is useful in experimental mathematics because it prevents overclaiming. A failure of one subgate identifies the next obstruction rather than invalidating every component of the pipeline.
+
+\section{Discussion and limitations}
+The architecture is deliberately finite-dimensional. It does not assert that a learned operator is self-adjoint, asymptotic, universal, or physically fundamental. It does not claim to prove the Riemann Hypothesis, produce zeta zeros, or construct a Hilbert--Pólya operator. In the prime-induced experiments, zeta language motivates certain spectral analogies, but the validation problem is finite and computational.
+
+The JEPA layer broadens the architecture from post hoc detection to prediction. In practical systems, this shift matters. A determinant stack can report that a topological transition has occurred; a JEPA-integrated stack can attempt to predict the latent signature before it occurs. The RevA layer then asks whether the predicted signature is structurally meaningful or merely an artifact of amplitude, sampling, or representation.
+
+The main limitation is that the architecture contains several design choices: the operator generator, the EML class, the target representation, the event mask, and the control family. These choices must be locked before promotion. Otherwise, repeated micro-tests can become an implicit tuning loop. For this reason, every claimed pass should include the full control table, failed subgates, and a record of the locked thresholds used.
+
+\section{Conclusion}
+We have formulated a Hybrid $\Gamma$--EML--$\alpha$--JEPA architecture suitable for experimental mathematics. The parent $\Gamma$--EML--$\alpha$ system supplies a finite action-based world-state generator. The determinant stack converts world states into lifted spectral-topological observables. A JEPA-style latent predictor forecasts future spectral-topological targets in representation space. RevA adversarial controls validate or reject the learned topology through wrong-sign, scrambled, ablated, and randomized branches.
+
+The core claim is architectural rather than theorem-proving: spectral-topological prediction should be learned in latent space but validated by adversarial controls. This yields a falsifiable program for finite operator systems and a practical world-model substrate for complex networks, markets, cyber systems, industrial control, biomedical monitoring, and other domains in which collective ordering matters more than isolated amplitude anomalies.
+
+\section{AI Disclosure}
+Large language models (including ChatGPT) were used mainly for language editing and coding assistance.
+
+\section{Data Availability}
+Code, scripts, and supplementary reproducibility materials used to generate the figures, ta
+bles, and numerical results are available in the Hybrid-EML-JEPA-Architecture- repository.
+Deposited in GitHub: https://github.com/Predilytics-Inc/Hybrid-EML-JEPA-Architecture- The package con
+tains test results, and README files.
+
+\section{Funded By}
+This paper and underlying study were funded by Predilytics Inc, A California C-Corp, USA.
+\begin{thebibliography}{99}
+
+\bibitem{Assran2023}
+Assran, M., Duval, Q., Misra, I., Bojanowski, P., Vincent, P., Rabbat, M., LeCun, Y., Ballas, N. (2023). Self-supervised learning from images with a joint-embedding predictive architecture. arXiv:2301.08243. Available at: https://arxiv.org/abs/2301.08243
+
+\bibitem{BaileyBorwein2005}
+Bailey, D. H., Borwein, J. M. (2005). Experimental mathematics: Examples, methods and implications. Notices Amer. Math. Soc. 52(5): 502--514.
+
+\bibitem{DawidLeCun2023}
+Dawid, A., LeCun, Y. (2023). Introduction to latent variable energy-based models: A path towards autonomous machine intelligence. arXiv:2306.02572. Available at: https://arxiv.org/abs/2306.02572
+
+\bibitem{JoseOperator2026}
+Jose, B. (2026). A Gated Operator--Determinant Program for Prime-Induced Spectral Statistics. Internal manuscript. Predilytics Inc., California, USA.
+
+\bibitem{JoseHybrid2026}
+Jose, B. (2026). Hybrid $\Gamma$--EML--$\alpha$ Architecture: A Framework on Multi-Scale Dynamics, Action-Based Inference, and Observable Path Measures. Internal manuscript. Predilytics Inc., California, USA.
+
+\bibitem{JoseDistributed2026}
+Jose, B., et al. (2026). Distributed Machine Intelligence using Event-Controlled Dynamics Operators with Privacy-Preserving Sharing and Governance Control. Non-provisional manuscript. Predilytics Inc., California, USA; submitted to USPTO, April 2026.
+
+\bibitem{LeCun2022}
+LeCun, Y. (2022). A path towards autonomous machine intelligence. OpenReview position paper. Available at: https://openreview.net/forum?id=BZ5a1r-kVsf
+
+\bibitem{Odrzywolek2026}
+Odrzywolek, A. (2026). All Elementary Functions from a Single Binary Operator. Version 2. Unpublished manuscript, April 2026.
+
+\end{thebibliography}
+
+\end{document}
