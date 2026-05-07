@@ -42,3 +42,8 @@ The framework is designed to separate three things:
 Biju Jose 
 Predilytics Inc., California, USA
 bjose@predilyticsinc.com
+
+# Copyright
+Copyright (C) 2026 Biju Jose / Predilytics Inc. All rights reserved unless otherwise stated.
+
+This repository is provided for scholarly inspection and reproducibility review. Reuse, redistribution, or derivative use of manuscript text, TeX source, figures, and result archives requires permission unless a separate license is explicitly provided.
